@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Jazmín & Alejandro 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+html,body{
+  margin:0;
+  padding:0;
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  font-family:'Segoe UI',sans-serif;
+  background:radial-gradient(circle at top,#ffb6c1,#ff4d6d);
+  color:white;
+}
+
+.page{
+  position:absolute;
+  inset:0;
+  display:none;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:30px;
+}
+
+.page.active{display:flex;}
+
+h1,h2{
+  text-shadow:0 0 20px #fff;
+}
+
+h1{font-size:2.3em;}
+h2{font-size:2.1em;margin-top:20px;}
+
+p{
+  font-size:1.15em;
+  max-width:900px;
+  line-height:1.7;
+}
+
+button{
+  margin-top:30px;
+  padding:15px 45px;
+  font-size:1.1em;
+  border:none;
+  border-radius:40px;
+  background:linear-gradient(45deg,#ff4d6d,#ff85a1);
+  color:white;
+  cursor:pointer;
+  box-shadow:0 0 25px rgba(255,255,255,.7);
+  transition:.3s;
+}
+button:hover{transform:scale(1.1);}
+
+img{
+  max-width:75%;
+  border-radius:25px;
+  box-shadow:0 0 30px rgba(255,255,255,.9);
+  animation:float 4s ease-in-out infinite;
+  margin:15px 0;
+}
+
+@keyframes float{
+  0%{transform:translateY(0)}
+  50%{transform:translateY(-12px)}
+  100%{transform:translateY(0)}
+}
+
+/* corazones */
+.heart{
+  position:absolute;
+  color:#ff3366;
+  opacity:.7;
+  animation:fall linear infinite;
+  pointer-events:none;
+}
+@keyframes fall{
+  from{transform:translateY(-10vh)}
+  to{transform:translateY(110vh)}
+}
+
+/* carpeta */
+.folder{
+  width:230px;
+  height:160px;
+  background:#ffd166;
+  border-radius:15px;
+  position:relative;
+  box-shadow:0 0 30px gold;
+  margin-bottom:25px;
+}
+.folder::before{
+  content:'';
+  position:absolute;
+  top:-30px;
+  left:20px;
+  width:90px;
+  height:45px;
+  background:#ffbe0b;
+  border-radius:12px 12px 0 0;
+}
+
+/* fuegos artificiales */
+.firework{
+  position:absolute;
+  width:6px;
+  height:6px;
+  background:white;
+  border-radius:50%;
+  animation:explode 1.2s ease-out forwards;
+  pointer-events:none;
+}
+@keyframes explode{
+  to{
+    transform:translate(var(--x),var(--y)) scale(0);
+    opacity:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Música -->
+<iframe id="music" width="0" height="0"
+src="https://www.youtube.com/embed/6kq1_J-R6JE?enablejsapi=1"
+allow="autoplay"></iframe>
+
+<div id="pages"></div>
+
+<script>
+const pagesData=[
+"Bienvenida mi amor 💖",
+"Jazmín, eres lo más bonito que me ha pasado.",
+"En estos 5 años mi mayor alegría ha sido pasar la vida junto a ti.",
+"El saber que estás en mi vida me hace tan bien y me da la fuerza de continuar.",
+"Mi mundo se hizo de la mejor manera cuando se construyó un presente contigo.",
+"Tenerte es la fuerza que me impulsa a seguir adelante.",
+"Mi vida es la imagen de un futuro a tu lado.",
+"Gracias por estar conmigo y regalarme miles de momentos.",
+"Por darme ese amor que nunca había visto.",
+"Tienes la magia para todo en mí.",
+"Tienes la llave de mi corazón y la luz de mis ojos.",
+"Sabes cómo enamorarme cada día.",
+"Eres increíble, la chica más genial que he conocido.",
+"No hay cosita más linda que tú y tus sentimientos.",
+"Cada vez que me miras me llevas al cielo.",
+"Vuelo tanto al verte, mi amor.",
+"Antes de continuar…",
+"¿Estás lista para leer lo que tengo para ti?",
+"Testamento de mi corazón"
+];
+
+const container=document.getElementById("pages");
+
+pagesData.forEach((t,i)=>{
+  const d=document.createElement("div");
+  d.className="page"+(i===0?" active":"");
+
+  if(i===7){
+    d.innerHTML=`<h1>${t}</h1><img src="foto1.jpg"><button onclick="next()">Continuar</button>`;
+  }else if(i===14){
+    d.innerHTML=`<h1>${t}</h1><img src="foto2.jpg"><button onclick="next()">Continuar</button>`;
+  }else if(i===17){
+    d.innerHTML=`<div class="folder"></div><p>${t}</p><button onclick="next()">Sí, estoy lista 💖</button>`;
+  }else if(i===18){
+    d.innerHTML=`
+      <h1>Mi testamento 💌</h1>
+      <p style="max-height:55vh;overflow:auto;padding-right:10px">
+Quisiera expresarte todas las ganas que tengo en vivir junto a ti, empezando por una vida con un sinfín de números junto a ti y momentos que tendremos uno al lado del otro.
+<br><br>
+Mi corazón es tuyo y mi vida se ha complementado tanto contigo.
+<br><br>
+Por mucho tiempo me he dado cuenta de ese capítulo incompleto que, hubo una vez…
+Como un cuento de hadas y que al final llega la persona para que ese capítulo y ese cuento pueda tener un…
+Y vivieron felices para siempre.
+<br><br>
+Imaginarse cosas contigo no es imposible y querer construirlo a tu lado se vuelve tan fácil.
+Nadie quita lo complicado que puede ser, pero con la ayuda de tu manito y con esa sonrisa me harás saltar páginas y capítulos como si se tratara de déjà vus que no podría explicar si son recuerdos de mi pasado o soy yo en el futuro omitiendo mi presente.
+<br><br>
+Tenerte conmigo es el privilegio que no tiene cualquier persona.
+<br><br>
+Gracias por ser la pieza que le dio sentido a mi rompecabezas.
+<br><br>
+Mi vida es tuya, porque tú eres quien la hace valer la pena.
+<br><br>
+Te amo muchote, hoy y en todos los futuros que alcancemos a construir.
+      </p>
+      <button onclick="final()">Continuar</button>
+    `;
+  }else{
+    d.innerHTML=`<h1>${t}</h1><button onclick="next()">Continuar</button>`;
+  }
+
+  container.appendChild(d);
+});
+
+let index=0;
+function next(){
+  if(index===0){
+    document.getElementById("music").src+="&autoplay=1";
+    if(navigator.vibrate) navigator.vibrate(200);
+  }
+  document.querySelectorAll(".page")[index].classList.remove("active");
+  index++;
+  document.querySelectorAll(".page")[index].classList.add("active");
+  hearts(); fireworks();
+}
+
+function hearts(){
+  for(let i=0;i<12;i++){
+    const h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="❤";
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize=(Math.random()*25+15)+"px";
+    h.style.animationDuration=(Math.random()*4+4)+"s";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),8000);
+  }
+}
+
+function fireworks(){
+  for(let i=0;i<20;i++){
+    const f=document.createElement("div");
+    f.className="firework";
+    f.style.left=Math.random()*100+"vw";
+    f.style.top=Math.random()*100+"vh";
+    f.style.setProperty("--x",(Math.random()*400-200)+"px");
+    f.style.setProperty("--y",(Math.random()*400-200)+"px");
+    document.body.appendChild(f);
+    setTimeout(()=>f.remove(),1200);
+  }
+}
+
+function final(){
+  document.body.innerHTML=`
+  <div class="page active">
+    <h1>Gracias por elegirme a mí 🤍</h1>
+    <h2>TE AMO MUCHO AMOR 💖</h2>
+  </div>`;
+
+  setInterval(()=>{
+    fireworks();
+  },900);
+}
+</script>
+
+</body>
+</html>
